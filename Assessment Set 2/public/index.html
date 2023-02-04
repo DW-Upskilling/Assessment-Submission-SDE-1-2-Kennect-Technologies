@@ -14,7 +14,7 @@
         }
 
         table {
-            margin: 10%;
+            margin: 2% 10%;
         }
 
         td {
@@ -42,7 +42,8 @@
             font-weight: bolder;
         }
 
-        input {
+        input,
+        select {
             margin: 1% 5%;
             font-size: larger;
             margin: 0 5%;
@@ -63,7 +64,8 @@
             display: inline-block;
         }
 
-        #outputPlaceholder>h1>div {
+        #outputPlaceholder>h1>div,
+        #outputPlaceholder>h3>input {
             display: inline;
         }
     </style>
@@ -76,72 +78,98 @@
                 <span>Date:</span>
             </td>
             <td>
-                <input type="date" id="datePicker" name="date" />
+                <input type="date" id="datePicker" name="date" onchange="getCommand()"/>
             </td>
         </tr>
         <tr>
             <td>
-                <span>Days: </span>
+                <span>Operation: </span>
             </td>
             <td>
-                <input type="number" id="days" name="days" value="0" />
-            </td>
-        <tr>
-            <td>
-                <span>Months: </span>
-            </td>
-            <td>
-                <input type="number" id="months" name="months" value="0" />
+                <select id="operation" onchange="getCommand()">
+                    <option value="add" selected>Add</option>
+                    <option value="subtract">Subtract</option>
+                </select>
             </td>
         </tr>
         <tr>
             <td>
-                <span>Years: </span>
+                <span>Type: </span>
             </td>
             <td>
-                <input type="number" id="years" name="years" value="0" />
+                <select id="type" onchange="getCommand()">
+                    <option value="days" selected>Days</option>
+                    <option value="weeks">Weeks</option>
+                    <option value="months">Months</option>
+                    <option value="years">Years</option>
+                </select>
             </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Value: </span>
+            </td>
+            <td>
+                <input type="number" id="value" name="value" value="0" onchange="getCommand()"/>
+            </td>
+        </tr>
+        
+        <tr>
+            <td><h2>></h2></td>
+            <td><input id="command" /></td>
         </tr>
 
         <tr>
+            <td></td>
             <td>
-                <button name="add" onclick="handleSubmit(this)">Add</button>
-            </td>
-            <td>
-                <button name="subtract" onclick="handleSubmit(this)">Subtract</button>
+                <button onclick="handleSubmit(this)">Query</button>
             </td>
         </tr>
+
+        
     </table>
     <div id="outputPlaceholder">
-        <h1>> <div id="output"></div>
+        <h1>
+            <div id="output"></div>
         </h1>
-
     </div>
     <script>
 
-        document.getElementById('datePicker').value = new Date().toISOString().split('T')[0];
-
         function handleSubmit(e) {
 
-            const date = new Date(document.getElementById('datePicker').value).toISOString();
-            const days = document.getElementById('days').value || 0;
-            const months = document.getElementById('months').value || 0;
-            const years = document.getElementById('years').value || 0;
+            const command = document.getElementById('command').value;
+            const queryParams = `q=${command}`;
 
-            const queryParams = `date=${date}&days=${days}&months=${months}&years=${years}`
-
-            if (e.name == 'add')
-                fetch(`/add?${queryParams}`).then(res => res.json()).then(res => setMessage(res['message'])).catch(err => setMessage(err))
-            if (e.name == 'subtract')
-                fetch(`/subtract?${queryParams}`).then(res => res.json()).then(res => setMessage(res['message'])).catch(err => setMessage(err))
+            fetch(`/command?${queryParams}`).then(res => res.json()).then(res => setMessage(res['message'])).catch(err => setMessage(err))
 
             // same as e.preventDefault();
             return false;
         }
 
+        const getCommand = () => {
+            const date = new Date(document.getElementById('datePicker').value).toISOString().split('T')[0];
+
+            const type = document.getElementById('type').value || 0;
+            const value = document.getElementById('value').value || 0;
+
+            const operation = document.getElementById('operation').value || 'add';
+
+            let command = `${operation}, ${value} ${type} to ${date} return the date`
+
+            setCommand(command);
+            return command;
+        }
+
+        const setCommand = (msg) => {
+            document.getElementById('command').value = msg;
+        }
+
         const setMessage = (msg) => {
             document.getElementById('output').innerText = msg;
         }
+
+        document.getElementById('datePicker').value = new Date().toISOString().split('T')[0];
+        getCommand();
 
     </script>
 </body>
