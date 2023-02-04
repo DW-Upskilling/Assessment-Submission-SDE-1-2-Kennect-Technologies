@@ -30,4 +30,4 @@ The server is default to run on port **80**, this can be updated in the **index.
 
 Open the following URL in the browser to query.
 
-`https://localhost`
+`http://localhost`

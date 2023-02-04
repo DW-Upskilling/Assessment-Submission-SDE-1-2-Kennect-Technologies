@@ -46,7 +46,7 @@ app.get('/command', async (request, response) => {
 	if (operation != 'add' && operation != 'subtract')
 		return incorrectQueryParams(
 			response,
-			'"Error: Incorrect operation specified in the text-based query for date modification."'
+			'"Error: Incorrect operation specified in the command."'
 		);
 
 	// Parsing date value, expected format yyyy-MM-dd
@@ -72,7 +72,7 @@ app.get('/command', async (request, response) => {
 	)
 		return incorrectQueryParams(
 			response,
-			'"Error: Incorrect Date specified in the text-based query for date modification."'
+			'"Error: Incorrect Date specified in the command."'
 		);
 	date = new Date(date);
 
@@ -87,7 +87,7 @@ app.get('/command', async (request, response) => {
 	if (!value.match('^-?[0-9]+$'))
 		return incorrectQueryParams(
 			response,
-			'"Error: Incorrect value specified in the text-based query for date modification."'
+			'"Error: Incorrect value specified in the command."'
 		);
 	value = parseInt(value);
 
@@ -115,7 +115,7 @@ app.get('/command', async (request, response) => {
 	else
 		return incorrectQueryParams(
 			response,
-			'"Error: Incorrect type specified in the text-based query for date modification."'
+			'"Error: Incorrect type specified in the command."'
 		);
 
 	// send the response
