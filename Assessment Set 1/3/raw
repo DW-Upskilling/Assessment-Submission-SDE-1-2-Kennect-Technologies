@@ -1,0 +1,9 @@
+Underlying Business Problems: - Sending all users emails without considering activeness - Replacing emails with chatbots - Using emails to get input from users rather
+
+1. Limiting Users:
+   - Limiting users who receive the daily remainder
+   - This can be possible by using last vote by the user
+   - If the user didn't vote for past few weeks, suspend sending daily emails
+2. Chatbots:
+   - Email Delivery Services are resource consuming
+   - Chatbots are lite and can make the chats more interactive

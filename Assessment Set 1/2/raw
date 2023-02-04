@@ -1,0 +1,22 @@
+What are chatbots?
+Chatbots are trained AI based programs which will reply when provided with text based query.
+
+How chatbots work:
+When a text is provided, the chatbots use text analysis to understand query provided by the user based on the past learning history. The more the data was used to train, they more acurate the chatbot.
+
+Current Solution:
+The current business solution depends on email based message delivery.
+
+Chatbot Solution:
+If chatbots were created, the message delivery can be made through 3rd party social media/messaging apps like whatsapp, telegram, discord etc.,
+
+How chatbot change the solution of current busineess::
+
+    - In current business logic, there should be more than 100+ Lac emails need to be sent. And Email Delivery system needs more resources than these chatbots
+    - Email conversations can be annoying, since they are static and generated based on templates. But coming to chatbots, more natuaral conversation is possible
+    - Quick delivery and response with chatbots. With emails, there need to be seperate forms to collect response like surveys
+    - Since usage of these social media apps is huge, end-users will be more engaged with the business and updates
+    - chatbots can also be used as remainders
+
+Referal Links:
+https://referralrock.com/blog/chatbots-and-email-marketing/

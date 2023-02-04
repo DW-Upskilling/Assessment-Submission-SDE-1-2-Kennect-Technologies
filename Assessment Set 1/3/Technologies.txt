@@ -1,0 +1,15 @@
+Underlying Business Challenges:
+- Inefficient distribution of daily reminders to all users, without taking into account their level of engagement
+- The need for replacing email-based communication with chatbots
+- Relying on emails to gather input from users
+
+User Limitation:
+
+The daily reminder system can be optimized by limiting the recipients to only active users
+This can be achieved by considering the users' last voting activity
+If a user hasn't voted in recent weeks, suspension of sending daily reminders via email can be considered
+Chatbots Adoption:
+
+The current email delivery services are resource-intensive
+The integration of chatbots can bring a more interactive and lightweight solution to the communication process
+Chatbots are known for their low resource utilization and engaging conversations.
