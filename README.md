@@ -1,1 +1,1 @@
-# Assessment-Submission-SDE-1-2-Kennect-Technologies-
+# Assessment-Submission-SDE-1-2-Kennect-Technologies
