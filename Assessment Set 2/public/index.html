@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            margin: 10%;
+        }
+
+        td {
+            padding: 1%;
+        }
+
+        button {
+            font-size: xx-large;
+            font-weight: bolder;
+            margin: 0 5%;
+            border: 0.1em solid black;
+            border-radius: 9px;
+            background-color: cyan;
+            box-shadow: 0.12em 0.1em black;
+            padding: 0 5%;
+        }
+
+        button:hover {
+            background-color: black;
+            color: cyan;
+        }
+
+        span {
+            font-size: medium;
+            font-weight: bolder;
+        }
+
+        input {
+            margin: 1% 5%;
+            font-size: larger;
+            margin: 0 5%;
+            border: 0.1em solid black;
+            border-radius: 8px;
+            background-color: cyan;
+            box-shadow: 0.09em 0.09em black;
+            padding: 2% 3%;
+        }
+
+        #outputPlaceholder {
+            border: 5px solid black;
+            padding: 3%;
+        }
+
+        #outputPlaceholder>h1 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            display: inline-block;
+        }
+
+        #outputPlaceholder>h1>div {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                <span>Date:</span>
+            </td>
+            <td>
+                <input type="date" id="datePicker" name="date" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Days: </span>
+            </td>
+            <td>
+                <input type="number" id="days" name="days" value="0" />
+            </td>
+        <tr>
+            <td>
+                <span>Months: </span>
+            </td>
+            <td>
+                <input type="number" id="months" name="months" value="0" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>Years: </span>
+            </td>
+            <td>
+                <input type="number" id="years" name="years" value="0" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button name="add" onclick="handleSubmit(this)">Add</button>
+            </td>
+            <td>
+                <button name="subtract" onclick="handleSubmit(this)">Subtract</button>
+            </td>
+        </tr>
+    </table>
+    <div id="outputPlaceholder">
+        <h1>> <div id="output"></div>
+        </h1>
+
+    </div>
+    <script>
+
+        document.getElementById('datePicker').value = new Date().toISOString().split('T')[0];
+
+        function handleSubmit(e) {
+
+            const date = new Date(document.getElementById('datePicker').value).toISOString();
+            const days = document.getElementById('days').value || 0;
+            const months = document.getElementById('months').value || 0;
+            const years = document.getElementById('years').value || 0;
+
+            const queryParams = `date=${date}&days=${days}&months=${months}&years=${years}`
+
+            if (e.name == 'add')
+                fetch(`/add?${queryParams}`).then(res => res.json()).then(res => setMessage(res['message'])).catch(err => setMessage(err))
+            if (e.name == 'subtract')
+                fetch(`/subtract?${queryParams}`).then(res => res.json()).then(res => setMessage(res['message'])).catch(err => setMessage(err))
+
+            // same as e.preventDefault();
+            return false;
+        }
+
+        const setMessage = (msg) => {
+            document.getElementById('output').innerText = msg;
+        }
+
+    </script>
+</body>
+
+</html>
